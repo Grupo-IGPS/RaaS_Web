@@ -1,0 +1,261 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   DESIGN TOKENS — Light (Neomorphism) & Dark (Liquid Crystal)
+   HSL components only (no hsl() wrapper) for Tailwind alpha support
+   ============================================================ */
+
+:root {
+  color-scheme: light;
+
+  --color-primary: 228 85% 23%;
+  --color-secondary: 239 52% 38%;
+  --color-accent: 234 63% 65%;
+
+  --color-background: 220 14% 94%;
+  --color-surface: 220 14% 97%;
+  --color-border: 220 13% 88%;
+
+  --color-text: 217 29% 18%;
+  --color-text-muted: 220 14% 46%;
+  --color-text-subtle: 220 10% 65%;
+
+  --neo-shadow-dark: #bebebe;
+  --neo-shadow-light: #ffffff;
+}
+
+.dark {
+  color-scheme: dark;
+
+  --color-background: 224 50% 7%;
+  --color-surface: 224 45% 10%;
+  --color-border: 224 35% 18%;
+
+  --color-text: 210 40% 95%;
+  --color-text-muted: 220 20% 70%;
+  --color-text-subtle: 220 15% 50%;
+
+  --neo-shadow-dark: rgba(0, 0, 0, 0.5);
+  --neo-shadow-light: rgba(108, 122, 224, 0.08);
+}
+
+/* ============================================================
+   BASE
+   ============================================================ */
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: hsl(var(--color-background));
+    color: hsl(var(--color-text));
+    overflow-x: hidden;
+    font-family: var(--font-inter), system-ui, sans-serif;
+    transition: background-color 500ms ease, color 500ms ease;
+  }
+
+  /* Smooth theme color transitions — only bg/border/color, NOT transform or opacity (GSAP owns those) */
+  body,
+  main, section, aside, footer, nav, header,
+  .card-adaptive, .glass-card, .glass-nav, .neo-card, .neo-sm, .neo-button {
+    transition-property: background-color, border-color, color;
+    transition-duration: 500ms;
+    transition-timing-function: ease;
+  }
+
+  ::selection {
+    background: hsl(var(--color-accent) / 0.25);
+    color: hsl(var(--color-text));
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--color-background));
+  }
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--color-border));
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--color-text-subtle));
+  }
+}
+
+/* ============================================================
+   COMPONENTS
+   ============================================================ */
+@layer components {
+
+  /* --- NEOMORPHIC (Light) --- */
+  .neo-card {
+    background: hsl(var(--color-background));
+    box-shadow: 20px 20px 60px var(--neo-shadow-dark), -20px -20px 60px var(--neo-shadow-light);
+    border-radius: 1.5rem;
+  }
+
+  .neo-sm {
+    background: hsl(var(--color-background));
+    box-shadow: 8px 8px 24px var(--neo-shadow-dark), -8px -8px 24px var(--neo-shadow-light);
+    border-radius: 1rem;
+  }
+
+  .neo-button {
+    background: hsl(var(--color-background));
+    box-shadow: 6px 6px 12px var(--neo-shadow-dark), -6px -6px 12px var(--neo-shadow-light);
+    border-radius: 9999px;
+    transition: all 0.2s ease;
+  }
+  .neo-button:active {
+    box-shadow: inset 4px 4px 8px var(--neo-shadow-dark), inset -4px -4px 8px var(--neo-shadow-light);
+  }
+
+  /* --- GLASS (Dark) --- */
+  .glass-card {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    background: hsl(var(--color-surface) / 0.55);
+    border: 1px solid hsl(var(--color-border) / 0.5);
+    border-radius: 1.5rem;
+  }
+
+  .glass-nav {
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    background: hsl(var(--color-background) / 0.8);
+    border-bottom: 1px solid hsl(var(--color-border) / 0.4);
+  }
+
+  /* --- ADAPTIVE CARD (both modes) --- */
+  .card-adaptive {
+    background: hsl(var(--color-surface));
+    border: 1px solid hsl(var(--color-border));
+    border-radius: 1.5rem;
+    transition: all 0.3s ease;
+  }
+  .dark .card-adaptive {
+    background: hsl(var(--color-surface) / 0.5);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  /* --- TEXT GRADIENTS --- */
+  .text-gradient {
+    background: linear-gradient(135deg, hsl(var(--color-primary)) 0%, hsl(var(--color-secondary)) 60%, hsl(var(--color-accent)) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .dark .text-gradient {
+    background: linear-gradient(135deg, hsl(var(--color-accent)) 0%, #a5b4fc 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .text-gradient-white {
+    background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.75) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* --- SPOTLIGHT --- */
+  .spotlight {
+    position: relative;
+  }
+  .spotlight::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, hsl(var(--color-accent) / 0.07) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* --- GRID BG --- */
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, hsl(var(--color-text) / 0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--color-text) / 0.04) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+
+  /* --- THEME TOGGLE (flat minimal — styles handled inline in ThemeToggle.tsx) --- */
+
+  /* --- SECTION LABEL --- */
+  .section-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: hsl(var(--color-accent));
+  }
+
+  /* --- HEADING PREMIUM --- */
+  .heading-premium {
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+  }
+}
+
+/* ============================================================
+   UTILITIES
+   ============================================================ */
+@layer utilities {
+  /* Lenis smooth scroll */
+  html.lenis {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+  .lenis.lenis-scrolling iframe {
+    pointer-events: none;
+  }
+
+  /* GPU hints */
+  .gpu {
+    will-change: transform;
+    transform: translateZ(0);
+  }
+
+  /* Shimmer */
+  .shimmer-bg {
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      hsl(var(--color-surface) / 0.6) 50%,
+      transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s linear infinite;
+  }
+
+  /* Reduced motion overrides */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
