@@ -1,13 +1,19 @@
-# CODEOWNERS — quien debe revisar los cambios.
+# CODEOWNERS — quién debe revisar y aprobar los cambios.
 #
-# ⚠️ REEMPLAZA los marcadores por los usuarios REALES de GitHub
-#    (los que aparecen en github.com/<usuario>), manteniendo la @.
+# Requisito: los usuarios listados aquí deben tener permiso de escritura
+# sobre el repositorio, si no, GitHub los ignora.
 #
 # Fabián revisa y aprueba todo el repositorio.
-*   @USUARIO-GITHUB-DE-FABIAN
+*   @CelestIA-SpA
 
-# Ejemplo de reparto por zonas (descomenta y ajusta cuando lo tengan claro):
-# /app/dashboard/            @USUARIO-GITHUB-DE-ANDRES
-# /app/marketplace/          @USUARIO-GITHUB-DE-ANDRES
-# /components/sections/      @USUARIO-GITHUB-DE-FABIAN
-# /services/                 @USUARIO-GITHUB-DE-FABIAN
+# Referencia del equipo:
+#   Fabián  → @CelestIA-SpA   (rama dev/fabian)
+#   Andrés  → @Arktail        (rama dev/andres)
+#
+# Ejemplo de reparto por zonas (descomenta y ajusta cuando lo tengan claro).
+# Ojo: la última regla que coincide es la que manda, así que estas líneas
+# reemplazarían al dueño global "*" en esas carpetas.
+# /app/dashboard/            @Arktail
+# /app/marketplace/          @Arktail
+# /components/sections/      @CelestIA-SpA
+# /services/                 @CelestIA-SpA
