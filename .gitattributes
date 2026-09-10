@@ -1,0 +1,21 @@
+# Normaliza los finales de linea: evita conflictos falsos entre Windows/macOS/Linux.
+* text=auto eol=lf
+
+# Archivos binarios: nunca tocar.
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.webp binary
+*.ico  binary
+*.svg  text eol=lf
+*.mp4  binary
+*.webm binary
+*.woff binary
+*.woff2 binary
+*.ttf  binary
+*.otf  binary
+*.pdf  binary
+
+# El lockfile lo resuelve pnpm, no se mergea a mano.
+pnpm-lock.yaml -diff linguist-generated=true

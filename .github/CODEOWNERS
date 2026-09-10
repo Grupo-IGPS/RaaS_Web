@@ -1,0 +1,13 @@
+# CODEOWNERS — quien debe revisar los cambios.
+#
+# ⚠️ REEMPLAZA los marcadores por los usuarios REALES de GitHub
+#    (los que aparecen en github.com/<usuario>), manteniendo la @.
+#
+# Fabián revisa y aprueba todo el repositorio.
+*   @USUARIO-GITHUB-DE-FABIAN
+
+# Ejemplo de reparto por zonas (descomenta y ajusta cuando lo tengan claro):
+# /app/dashboard/            @USUARIO-GITHUB-DE-ANDRES
+# /app/marketplace/          @USUARIO-GITHUB-DE-ANDRES
+# /components/sections/      @USUARIO-GITHUB-DE-FABIAN
+# /services/                 @USUARIO-GITHUB-DE-FABIAN
